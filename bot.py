@@ -11,7 +11,7 @@ logging.basicConfig(filename="bot.log", filemode="w+", level=logging.INFO)
 
 
 intents = nextcord.Intents.default()
-# intents.members = True
+intents.members = True
 # intents.presences = True
 
 bot = Bot("/", case_insensitivity=True, intents=intents)

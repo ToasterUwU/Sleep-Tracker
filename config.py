@@ -33,6 +33,5 @@ with open("_base_config.json", "r") as f:
 
 CONFIG = JsonDataSaver(
     "config",
-    default=default_config,
-    func_if_default=_inform_and_exit
+    default=default_config
 )

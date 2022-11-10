@@ -7,3 +7,4 @@ __pycache__
 /dist
 /build
 /windows_installer.exe
+/config/GENERAL.json

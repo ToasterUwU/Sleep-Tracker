@@ -296,12 +296,15 @@ class SleepTracking(commands.Cog):
                 in self.sleep_tracker_files[after.channel.guild.id]["SLEEP_CHANNEL_IDS"]
                 and before.channel != after.channel
             ):
-                await after.channel.send(
-                    embed=fancy_embed(
-                        "Good Night!",
-                        description=f"{member.mention} joined the sleep call.",
+                try:
+                    await after.channel.send(
+                        embed=fancy_embed(
+                            "Good Night!",
+                            description=f"{member.mention} joined the sleep call.",
+                        )
                     )
-                )
+                except nextcord.errors.Forbidden:
+                    pass
 
                 if after.channel.guild.id not in self.internal_state_db:
                     self.internal_state_db[after.channel.guild.id] = {}
@@ -316,12 +319,16 @@ class SleepTracking(commands.Cog):
                 ]
                 and after.channel != before.channel
             ):
-                await before.channel.send(
-                    embed=fancy_embed(
-                        "Good Morning!",
-                        description=f"{member.mention} left the sleep call.",
+                try:
+                    await before.channel.send(
+                        embed=fancy_embed(
+                            "Good Morning!",
+                            description=f"{member.mention} left the sleep call.",
+                        )
                     )
-                )
+                except nextcord.errors.Forbidden:
+                    pass
+
 
                 if before.channel.guild.id in self.internal_state_db:
                     if member.id in self.internal_state_db[before.channel.guild.id]:

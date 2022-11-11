@@ -206,7 +206,14 @@ class SleepTracking(commands.Cog):
             await interaction.send(
                 embed=fancy_embed(
                     "Slept in total",
-                    description="\n".join(self.convert_seconds_to_time_dict(seconds)),
+                    description="\n".join(
+                        [
+                            f"{key}: {val}"
+                            for key, val in self.convert_seconds_to_time_dict(
+                                seconds
+                            ).items()
+                        ]
+                    ),
                 )
             )
         else:
@@ -242,7 +249,7 @@ class SleepTracking(commands.Cog):
         )
 
         fields: Dict[str, str] = {}
-        if len(entries) > 0:
+        if len(entries) > 0 and any(len(user_ids) != 0 for user_ids, _ in entries):
             i = 1
             for user_ids, time_dict in entries:
                 if len(user_ids) == 0:
@@ -328,7 +335,6 @@ class SleepTracking(commands.Cog):
                     )
                 except nextcord.errors.Forbidden:
                     pass
-
 
                 if before.channel.guild.id in self.internal_state_db:
                     if member.id in self.internal_state_db[before.channel.guild.id]:

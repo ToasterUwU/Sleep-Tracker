@@ -2,7 +2,7 @@
   "BASE_KIT_VERSION": "4.0.0",
   "BOT_VERSION": "1.0.0",
   "TOKEN": "",
-  "MEMBERS_INTENT": false,
+  "MEMBERS_INTENT": true,
   "PRESENCE_INTENT": false,
   "MESSAGE_CONTENT_INTENT": false,
   "EMBED_COLOR": "#F7A8B8",

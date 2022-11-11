@@ -9,5 +9,14 @@
   "OWNER_COG_GUILD_IDS": [
     912774585773080606
   ],
-  "ERROR_WEBHOOK_URL": ""
+  "ERROR_WEBHOOK_URL": "",
+  "SUPPORT_INVITE": "https://discord.gg/76ZAefBcC4",
+  "DONATION_FIELDS": {
+    "Who am I?": "My name is Aki, you can find me on Discord as 'Aki ToasterUwU#0001'",
+    "Patreon": "https://www.patreon.com/ToasterUwU",
+    "Bitcoin": "bc1qu9r7ytjy8vpx9skyx5yrw3rhktdg86sw6lukvz",
+    "Ethereum": "0x009167F0987B45a2Ab58075d283B11314fBE8AC5",
+    "Basic Attention Token (BAT)": "0x009167F0987B45a2Ab58075d283B11314fBE8AC5",
+    "Monero": "4387TkgLEwzciuKmfhRVkCRBKkm4jdcMr3yBv7Mm4NYxhByH9ooMELGH1XA39cbNJQh2u7EPwq9JFd5mNZV2dw2GSRqYBCp"
+  }
 }

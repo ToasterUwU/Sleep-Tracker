@@ -9,6 +9,7 @@ import nextcord
 from nextcord.ext import application_checks, commands, tasks
 
 from internal_tools.configuration import CONFIG
+from internal_tools.discord import fancy_embed
 
 
 async def main():
@@ -43,6 +44,26 @@ async def main():
         await bot.change_presence(activity=nextcord.Game("/sleep-channel add"))
 
         print(f"Online and Ready\nLogged in as {bot.user}")
+
+    @bot.slash_command(
+        "donate",
+        description="Shows info about where you can donate. Making the Bot took a lot of time and effort and some money.",
+    )
+    async def donate(interaction: nextcord.Interaction):
+        embed = fancy_embed(
+            "How to donate",
+            description="Down below you can see all ways to donate to me.",
+            fields=CONFIG["GENERAL"]["DONATION_FIELDS"],
+        )
+
+        await interaction.send(embed=embed)
+
+    @bot.slash_command(
+        name="support",
+        description="Gives you a Invite to the Support Server where you can talk to my Developer.",
+    )
+    async def support(interaction: nextcord.Interaction):
+        await interaction.send(CONFIG["GENERAL"]["SUPPORT_INVITE"], ephemeral=True)
 
     @bot.slash_command(
         name="reload-all",

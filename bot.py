@@ -10,6 +10,7 @@ from nextcord.ext import application_checks, commands, tasks
 
 from internal_tools.configuration import CONFIG
 from internal_tools.discord import fancy_embed
+from internal_tools.general import error_webhook_send
 
 
 async def main():
@@ -306,13 +307,7 @@ async def main():
             ):
                 return
 
-        if CONFIG["GENERAL"]["ERROR_WEBHOOK_URL"]:
-            webhook = nextcord.Webhook.from_url(
-                CONFIG["GENERAL"]["ERROR_WEBHOOK_URL"], session=aiohttp.ClientSession()
-            )
-
-            text = "".join(traceback.format_exception(original_exception))
-            await webhook.send(f"Unpredicted Error:\n```\n{text}\n```")
+        await error_webhook_send(original_exception)
 
     await bot.start(CONFIG["GENERAL"]["TOKEN"])
 

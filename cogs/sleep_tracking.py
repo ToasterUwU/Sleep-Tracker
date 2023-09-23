@@ -175,7 +175,7 @@ class SleepTracking(commands.Cog):
         entries.sort(key=lambda x: x[2], reverse=True)
 
         clean_entries: List[Tuple[List[int], Dict[str, int]]] = [
-            tuple(entry[:2]) for entry in entries
+            (entry[0], entry[1]) for entry in entries
         ]
 
         return clean_entries

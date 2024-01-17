@@ -356,6 +356,7 @@ class SleepTracking(commands.Cog):
                                 ]
                             )
 
+                        current_time = time.time()
                         for comb in combs:
                             if member.id not in comb:
                                 continue
@@ -380,7 +381,7 @@ class SleepTracking(commands.Cog):
                             ]
                             newest_join_value = max(joined_at_values)
 
-                            seconds_spent_together = time.time() - newest_join_value
+                            seconds_spent_together = current_time - newest_join_value
                             if seconds_spent_together > 0:
                                 self.sleep_tracker_files[before.channel.guild.id][
                                     "SLEEP_DATA"

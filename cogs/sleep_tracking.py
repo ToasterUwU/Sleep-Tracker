@@ -27,7 +27,11 @@ class SleepTracking(commands.Cog):
     async def on_ready(self):
         async for g in self.bot.fetch_guilds(limit=None):
             self.sleep_tracker_files[g.id] = JsonDictSaver(
-                str(g.id), default={"SLEEP_CHANNEL_IDS": [], "SLEEP_DATA": {}}
+                str(g.id),
+                default={
+                    "SLEEP_CHANNEL_IDS": [],
+                    "SLEEP_DATA": {"TOTALS": {}, "SESSIONS": {}},
+                },
             )
 
     @commands.Cog.listener()

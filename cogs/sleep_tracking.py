@@ -186,21 +186,32 @@ class SleepTracking(commands.Cog):
 
     @top_command_sleep_tracker.subcommand(
         "slept-in-total-for",
-        description="Shows how long you have slept in total, including alone.",
+        description="Shows how long you have or another person has slept in total, including alone.",
     )
-    async def sleep_tracker_slept_alone(self, interaction: nextcord.Interaction):
+    async def sleep_tracker_slept_alone(
+        self,
+        interaction: nextcord.Interaction,
+        member: Optional[Union[nextcord.Member, nextcord.User]] = nextcord.SlashOption(
+            "user",
+            description="A User to get the total of, if not given will show your own total",
+            default=None,
+        ),
+    ):
         if not interaction.guild_id:
             raise application_checks.errors.ApplicationNoPrivateMessage()
 
         if not interaction.user:
             raise ValueError("Cant proceed without a interaction.user value.")
 
+        if member is None:
+            member = interaction.user
+
         if (
-            str(interaction.user.id)
+            str(member.id)
             in self.sleep_tracker_files[interaction.guild_id]["SLEEP_DATA"]
         ):
             seconds = self.sleep_tracker_files[interaction.guild_id]["SLEEP_DATA"][
-                str(interaction.user.id)
+                str(member.id)
             ]
 
             await interaction.send(

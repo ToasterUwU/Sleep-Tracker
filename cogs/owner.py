@@ -161,6 +161,8 @@ class Owner(commands.Cog):
         name="info", description="Shows info about the Bot and its stats"
     )
     async def show_info_and_stats(self, interaction: nextcord.Interaction):
+        await interaction.response.defer()
+
         guild_amount = 0
         member_amount = 0
 
@@ -177,6 +179,8 @@ class Owner(commands.Cog):
                 "Approximate User Amount": member_amount,
             },
         )
+
+        await interaction.send(embed=embed)
 
 
 async def setup(bot):

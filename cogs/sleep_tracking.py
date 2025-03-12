@@ -48,7 +48,7 @@ class SleepTracking(commands.Cog):
     @nextcord.slash_command(
         "sleep-channel",
         default_member_permissions=nextcord.Permissions(manage_channels=True),
-        dm_permission=False,
+        contexts=[nextcord.InteractionContextType.guild],
     )
     async def top_command_sleep_channel(self, interaction: nextcord.Interaction):
         pass
@@ -180,7 +180,10 @@ class SleepTracking(commands.Cog):
 
         return clean_entries
 
-    @nextcord.slash_command("sleep-tracker", dm_permission=False)
+    @nextcord.slash_command(
+        "sleep-tracker",
+        contexts=[nextcord.InteractionContextType.guild],
+    )
     async def top_command_sleep_tracker(self, interaction: nextcord.Interaction):
         pass
 
@@ -268,7 +271,7 @@ class SleepTracking(commands.Cog):
 
                 if i % 20 == 0:
                     await interaction.send(
-                        embed=fancy_embed(f"Place {i-19}-{i}", fields=fields)
+                        embed=fancy_embed(f"Place {i - 19}-{i}", fields=fields)
                     )
                     fields: Dict[str, str] = {}
 
@@ -285,7 +288,7 @@ class SleepTracking(commands.Cog):
                 lowest_place = 1
 
             if lowest_place != i - 1:
-                title = f"Place {lowest_place}-{i-1}"
+                title = f"Place {lowest_place}-{i - 1}"
             else:
                 title = "Sleeping Entries"
 
@@ -295,7 +298,10 @@ class SleepTracking(commands.Cog):
                 "There are no entries that match this request.", ephemeral=True
             )
 
-    @nextcord.user_command("Slept together for", dm_permission=False)
+    @nextcord.user_command(
+        "Slept together for",
+        contexts=[nextcord.InteractionContextType.guild],
+    )
     async def slept_together_user_command(
         self, interaction: nextcord.Interaction, member: nextcord.Member
     ):

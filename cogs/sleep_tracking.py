@@ -27,7 +27,11 @@ class SleepTracking(commands.Cog):
     async def on_ready(self):
         async for g in self.bot.fetch_guilds(limit=None):
             self.sleep_tracker_files[g.id] = JsonDictSaver(
-                str(g.id), default={"SLEEP_CHANNEL_IDS": [], "SLEEP_DATA": {}}
+                str(g.id),
+                default={
+                    "SLEEP_CHANNEL_IDS": [],
+                    "SLEEP_DATA": {"TOTALS": {}, "SESSIONS": {}},
+                },
             )
 
     @commands.Cog.listener()
@@ -369,6 +373,7 @@ class SleepTracking(commands.Cog):
                                 ]
                             )
 
+                        current_time = time.time()
                         for comb in combs:
                             if member.id not in comb:
                                 continue
@@ -393,7 +398,7 @@ class SleepTracking(commands.Cog):
                             ]
                             newest_join_value = max(joined_at_values)
 
-                            seconds_spent_together = time.time() - newest_join_value
+                            seconds_spent_together = current_time - newest_join_value
                             if seconds_spent_together > 0:
                                 self.sleep_tracker_files[before.channel.guild.id][
                                     "SLEEP_DATA"

@@ -1,1 +1,1 @@
-nextcord[speed, voice] ==  3.0.*
+nextcord[speed, voice] == 3.1.*
